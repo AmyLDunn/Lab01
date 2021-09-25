@@ -7,23 +7,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     //Buttons used to input numbers, operations, etc
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8,
             btn9, btnAdd, btnDiv, btnMul, btnClr, btnSub, btnEql,
-            btnDec, btnOpn, btnCls, btnExp, btnDel;
+            btnDec;
 
     //Calculator display
-    TextView display, expressionDisplay;
+    TextView display;
 
-    //ArrayList to hold the expression
-    ArrayList<String> expression = new ArrayList<String>();
+    //Values used in calculator operations
+    double val1, val2;
 
-    //Booleans to show if the display is an error or a result
-    boolean errorDis, resultDis;
+    //Boolean values that will determine what operation is requested
+    boolean add, mul, div, sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         btn9 = findViewById(R.id.btn9);
 
         //Operators
-        btnOpn = findViewById(R.id.btnOpn);
-        btnCls = findViewById(R.id.btnCls);
         btnAdd = findViewById(R.id.btnAdd);
         btnMul = findViewById(R.id.btnMul);
         btnDiv = findViewById(R.id.btnDiv);
@@ -54,34 +50,21 @@ public class MainActivity extends AppCompatActivity {
         btnDec = findViewById(R.id.btnDec);
         btnClr = findViewById(R.id.btnClr);
         btnEql = findViewById(R.id.btnEql);
-        btnExp = findViewById(R.id.btnExp);
-        btnDel = findViewById(R.id.btnDel);
 
         //Display
         display = findViewById(R.id.display);
-        expressionDisplay = findViewById(R.id.expression);
-
-        // Button (
-        btnOpn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                addOperator("(");
-            }
-        });
-
-        // Button )
-        btnCls.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                addOperator(")");
-            }
-        });
 
         //Button 0
         btn0.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                addDigit("0");
+                // If the display already is a "0", we don't want to print "00".
+                if ( display.getText().equals("0") ){
+                    display.setText("0");
+                    // Otherwise we add "0" to the right-side of the number
+                } else {
+                    display.setText(display.getText() + "0");
+                }
             }
         });
 
@@ -89,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("1");
+                // If the display is "0", we replace it with this number because "01" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("1");
+                    // Otherwise we add "1" to the right-side of the number
+                } else {
+                    display.setText(display.getText()+"1");
+                }
             }
         });
 
@@ -97,7 +86,13 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("2");
+                // If the display is "0", we replace it with this number because "02" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("2");
+                } else {
+                    // Otherwise we add "2" to the right-side of the number
+                    display.setText(display.getText()+"2");
+                }
             }
         });
 
@@ -105,7 +100,13 @@ public class MainActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("3");
+                // If the display is "0", we replace it with this number because "02" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("3");
+                } else {
+                    // Otherwise we add "3" to the right-side of the number
+                    display.setText(display.getText()+"3");
+                }
             }
         });
 
@@ -113,7 +114,13 @@ public class MainActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("4");
+                // If the display is "0", we replace it with this number because "04" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("4");
+                } else {
+                    // Otherwise we add "4" to the right-side of the number
+                    display.setText(display.getText()+"4");
+                }
             }
         });
 
@@ -121,7 +128,13 @@ public class MainActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("5");
+                // If the display is "0", we replace it with this number because "05" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("5");
+                } else {
+                    // Otherwise we add "5" to the right-side of the number
+                    display.setText(display.getText()+"5");
+                }
             }
         });
 
@@ -129,7 +142,13 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("6");
+                // If the display is "0", we replace it with this number because "06" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("6");
+                } else {
+                    // Otherwise we add "6" to the right-side of the number
+                    display.setText(display.getText()+"6");
+                }
             }
         });
 
@@ -137,7 +156,13 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("7");
+                // If the display is "0", we replace it with this number because "07" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("7");
+                } else {
+                    // Otherwise we add "7" to the right-side of the number
+                    display.setText(display.getText()+"7");
+                }
             }
         });
 
@@ -145,7 +170,13 @@ public class MainActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("8");
+                // If the display is "0", we replace it with this number because "08" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("8");
+                } else {
+                    // Otherwise we add "8" to the right-side of the number
+                    display.setText(display.getText()+"8");
+                }
             }
         });
 
@@ -153,7 +184,13 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                addDigit("9");
+                // If the display is "0", we replace it with this number because "09" doesn't make sense
+                if ( display.getText().equals("0") ){
+                    display.setText("9");
+                } else {
+                    // Otherwise we add "9" to the right-side of the number
+                    display.setText(display.getText()+"9");
+                }
             }
         });
 
@@ -161,10 +198,6 @@ public class MainActivity extends AppCompatActivity {
         btnDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Can't use the addDigit method because we have two possible outputs: "0." or "."
-                if ( resultDis || errorDis ){
-                    clearAll();
-                }
                 if ( display.getText().equals("") ){
                     // If the display is empty, pressing a decimal should display "0."
                     display.setText("0.");
@@ -179,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addOperator("+");
+                return;
             }
         });
 
@@ -187,11 +220,7 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( display.getText().equals("")){
-                    display.setText("-");
-                } else {
-                    addOperator("-");
-                }
+                return;
             }
         });
 
@@ -199,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addOperator("*");
+                return;
             }
         });
 
@@ -207,15 +236,7 @@ public class MainActivity extends AppCompatActivity {
         btnDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addOperator("/");
-            }
-        });
-
-        //Button exponent
-        btnExp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addOperator("^");
+                return;
             }
         });
 
@@ -223,23 +244,7 @@ public class MainActivity extends AppCompatActivity {
         btnEql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( display.getText().equals("") ) {
-                    expressionDisplay.setText(expressionDisplay.getText()+"=");
-                } else {
-                    expression.add(display.getText().toString());
-                    expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" = ");
-                }
-                if (PostfixCalculator.validExpression(expression)) {
-                    double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(expression));
-                    if (answer % 1 == 0) {
-                        display.setText(String.valueOf((int) answer));
-                    } else {
-                        display.setText(String.valueOf(answer));
-                    }
-                    resultDis = true;
-                } else {
-                    setError();
-                }
+                return;
             }
         });
 
@@ -248,49 +253,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Clears the screen. Do we need to also clear the saved operations and numbers?
-                clearAll();
+                display.setText("");
             }
         });
-    }
-
-    private void addDigit(String digit){
-        if ( resultDis || errorDis ){
-            clearAll();
-        }
-        // If the display already is a "0", we don't want to print "00"
-        if ( display.getText().equals("0") ){
-            display.setText(digit);
-            // Otherwise we add "0" to the right-side of the number
-        } else {
-            display.setText(display.getText() + digit);
-        }
-    }
-
-    private void addOperator(String operator){
-        if (resultDis || errorDis){
-            clearAll();
-        }
-        if ( !display.getText().equals("")) {
-            expression.add(display.getText().toString());
-            expression.add(operator);
-            expressionDisplay.setText(expressionDisplay.getText() + display.getText().toString() + " " + operator + " ");
-            display.setText("");
-        } else {
-            expression.add(operator);
-            expressionDisplay.setText(expressionDisplay.getText() + " " + operator + " ");
-            display.setText("");
-        }
-    }
-
-    private void setError(){
-        display.setText("ERROR");
-        errorDis = true;
-    }
-
-    private void clearAll(){
-        display.setText("");
-        expressionDisplay.setText("");
-        expression = new ArrayList<String>();
-        errorDis = resultDis = false;
     }
 }

@@ -7,68 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/expression"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:padding="10dp"
-        android:gravity="bottom|right"
-        android:textSize="30dp"/>
-
     <!-- The textwindow on top where the equation and answer are displayed -->
     <TextView
         android:id="@+id/display"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:gravity="bottom|right"
-        android:textSize="50dp" />
-
-    <!-- Row holds the buttons for (, ), ^, and % -->
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnOpn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text="("
-            android:textSize="25sp" />
-
-        <Button
-            android:id="@+id/btnCls"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text=")"
-            android:textSize="25sp" />
-
-        <Button
-            android:id="@+id/btnExp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text="^"
-            android:textSize="25sp" />
-
-        <Button
-            android:id="@+id/btnDel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text="Delete"
-            android:textSize="15sp" />
-
-    </LinearLayout>
+        android:layout_weight="10" />
 
     <!-- First row of buttons: 1, 2, 3, + -->
     <LinearLayout
