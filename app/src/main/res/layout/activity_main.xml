@@ -12,7 +12,9 @@
         android:id="@+id/display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10" />
+        android:layout_weight="10"
+        android:gravity="bottom|right"
+        android:textSize="30dp"/>
 
     <!-- First row of buttons: 1, 2, 3, + -->
     <LinearLayout
