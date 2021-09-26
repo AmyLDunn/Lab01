@@ -7,6 +7,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/*
+
+    Remove the following issues when they're solved (or add to the list if you find some):
+
+    - The first time you press an operator it won't show up on the screen. It still works,
+      but you just can't see it.
+
+    - You can see what the correct answer is, but they're smaller than they should be (e.g.
+      6 + 6 = 0.12, 9 * 9 = 0.0081)
+
+    - I don't know how to get it to only display one operator (e.g. when you press 1 +, and
+      then press -, the text should ONLY display 1 -, but it will display 1 +- ...)
+
+    - When you press (operand) (operator) (equals) it produces a value. The equal button
+      should not do anything if only one value exists.
+
+    There are probably plenty of more errors, but these are the ones I could find.
+
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     //Buttons used to input numbers, operations, etc
@@ -58,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
         btn0.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "0");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "0");
+                }
+
                 addOperand("0");
             }
         });
@@ -66,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "1");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "1");
+                }
+
                 addOperand("1");
             }
         });
@@ -74,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "2");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "2");
+                }
+
                 addOperand("2");
             }
         });
@@ -82,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "3");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "3");
+                }
+
                 addOperand("3");
             }
         });
@@ -90,6 +142,14 @@ public class MainActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "4");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "4");
+                }
+
                 addOperand("4");
             }
         });
@@ -98,6 +158,14 @@ public class MainActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "5");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "5");
+                }
+
                 addOperand("5");
             }
         });
@@ -106,6 +174,14 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "6");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "6");
+                }
+
                 addOperand("6");
             }
         });
@@ -114,6 +190,14 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "7");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "7");
+                }
+
                 addOperand("7");
             }
         });
@@ -122,6 +206,14 @@ public class MainActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "8");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "8");
+                }
+
                 addOperand("8");
             }
         });
@@ -130,6 +222,14 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
+                //Determining if the number will be a part of val1 or val2
+                if (add == false && div == false && mul == false && sub == false) {
+                    val1 = Double.parseDouble( String.valueOf(val1) + "9");
+                } else {
+                    val2 = Double.parseDouble( String.valueOf(val2) + "9");
+                }
+
                 addOperand("9");
             }
         });
@@ -152,7 +252,14 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return;
+
+                //Letting system which operator is in use
+                addOperator("+");
+                add = true;
+                mul = false;
+                div = false;
+                sub = false;
+
             }
         });
 
@@ -160,7 +267,14 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return;
+
+                //Letting system which operator is in use
+                addOperator("-");
+                add = false;
+                mul = false;
+                div = false;
+                sub = true;
+
             }
         });
 
@@ -168,7 +282,14 @@ public class MainActivity extends AppCompatActivity {
         btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return;
+
+                //Letting system which operator is in use
+                addOperator("*");
+                add = false;
+                mul = true;
+                div = false;
+                sub = false;
+
             }
         });
 
@@ -176,7 +297,16 @@ public class MainActivity extends AppCompatActivity {
         btnDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return;
+
+                //Letting system which operator is in use
+                addOperator("/");
+                add = false;
+                mul = false;
+                div = true;
+                sub = false;
+
+                //
+
             }
         });
 
@@ -184,7 +314,24 @@ public class MainActivity extends AppCompatActivity {
         btnEql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return;
+
+                //Determining which operator will be used
+                if (add) {
+                    val1 = val1 + val2;
+                } else if (div) {
+                    val1 = val1 / val2;
+                } else if (mul) {
+                    val1 = val1 * val2;
+                } else if (sub) {
+                    val1 = val1 - val2;
+                }
+
+                //Resetting val2
+                val2 = 0;
+
+                //Displaying the new value
+                display.setText("" + val1);
+
             }
         });
 
@@ -194,6 +341,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Clears the screen. Do we need to also clear the saved operations and numbers?
                 display.setText("");
+
+                //Clearing operators
+                add = false;
+                div = false;
+                mul = false;
+                sub = false;
+
+                //Clearing operands
+                val1 = 0;
+                val2 = 0;
             }
         });
     }
@@ -204,6 +361,21 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // Otherwise we add num to the right-side of the number
             display.setText(display.getText()+num);
+        }
+    }
+
+    private void addOperator(String operator) {
+        if (!display.getText().equals("")) {
+            if (add) {
+                display.setText(display.getText() + operator);
+            } else if (mul) {
+                display.setText(display.getText() + operator);
+            } else if (div) {
+                display.setText(display.getText() + operator);
+            } else if (sub) {
+                display.setText(display.getText() + operator);
+            }
+
         }
     }
 }
