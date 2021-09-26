@@ -58,13 +58,7 @@ public class MainActivity extends AppCompatActivity {
         btn0.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                // If the display already is a "0", we don't want to print "00".
-                if ( display.getText().equals("0") ){
-                    display.setText("0");
-                    // Otherwise we add "0" to the right-side of the number
-                } else {
-                    display.setText(display.getText() + "0");
-                }
+                addOperand("0");
             }
         });
 
@@ -72,13 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "01" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("1");
-                    // Otherwise we add "1" to the right-side of the number
-                } else {
-                    display.setText(display.getText()+"1");
-                }
+                addOperand("1");
             }
         });
 
@@ -86,13 +74,7 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "02" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("2");
-                } else {
-                    // Otherwise we add "2" to the right-side of the number
-                    display.setText(display.getText()+"2");
-                }
+                addOperand("2");
             }
         });
 
@@ -100,13 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "02" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("3");
-                } else {
-                    // Otherwise we add "3" to the right-side of the number
-                    display.setText(display.getText()+"3");
-                }
+                addOperand("3");
             }
         });
 
@@ -114,13 +90,7 @@ public class MainActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "04" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("4");
-                } else {
-                    // Otherwise we add "4" to the right-side of the number
-                    display.setText(display.getText()+"4");
-                }
+                addOperand("4");
             }
         });
 
@@ -128,13 +98,7 @@ public class MainActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "05" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("5");
-                } else {
-                    // Otherwise we add "5" to the right-side of the number
-                    display.setText(display.getText()+"5");
-                }
+                addOperand("5");
             }
         });
 
@@ -142,13 +106,7 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "06" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("6");
-                } else {
-                    // Otherwise we add "6" to the right-side of the number
-                    display.setText(display.getText()+"6");
-                }
+                addOperand("6");
             }
         });
 
@@ -156,13 +114,7 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "07" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("7");
-                } else {
-                    // Otherwise we add "7" to the right-side of the number
-                    display.setText(display.getText()+"7");
-                }
+                addOperand("7");
             }
         });
 
@@ -170,13 +122,7 @@ public class MainActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "08" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("8");
-                } else {
-                    // Otherwise we add "8" to the right-side of the number
-                    display.setText(display.getText()+"8");
-                }
+                addOperand("8");
             }
         });
 
@@ -184,13 +130,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // If the display is "0", we replace it with this number because "09" doesn't make sense
-                if ( display.getText().equals("0") ){
-                    display.setText("9");
-                } else {
-                    // Otherwise we add "9" to the right-side of the number
-                    display.setText(display.getText()+"9");
-                }
+                addOperand("9");
             }
         });
 
@@ -256,5 +196,14 @@ public class MainActivity extends AppCompatActivity {
                 display.setText("");
             }
         });
+    }
+
+    private void addOperand(String num){
+        if ( display.getText().equals("0") ){
+            display.setText(num);
+        } else {
+            // Otherwise we add num to the right-side of the number
+            display.setText(display.getText()+num);
+        }
     }
 }
