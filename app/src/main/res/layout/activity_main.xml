@@ -7,12 +7,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <!-- The textwindow to show the current equation -->
+    <TextView
+        android:id="@+id/expressiondisplay"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="10dp"
+        android:gravity="bottom|right"
+        android:textSize="30dp"/>
+
+
     <!-- The textwindow on top where the equation and answer are displayed -->
     <TextView
         android:id="@+id/display"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10" />
+        android:layout_height="75dp"
+        android:gravity="bottom|right"
+        android:textSize="50dp"/>
 
     <!-- First row of buttons: 1, 2, 3, + -->
     <LinearLayout

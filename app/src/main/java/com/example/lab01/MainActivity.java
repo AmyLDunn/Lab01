@@ -9,26 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/*
-
-    Remove the following issues when they're solved (or add to the list if you find some):
-
-    - The first time you press an operator it won't show up on the screen. It still works,
-      but you just can't see it.
-
-    - You can see what the correct answer is, but they're smaller than they should be (e.g.
-      6 + 6 = 0.12, 9 * 9 = 0.0081)
-
-    - I don't know how to get it to only display one operator (e.g. when you press 1 +, and
-      then press -, the text should ONLY display 1 -, but it will display 1 +- ...)
-
-    - When you press (operand) (operator) (equals) it produces a value. The equal button
-      should not do anything if only one value exists.
-
-    There are probably plenty of more errors, but these are the ones I could find.
-
- */
-
 public class MainActivity extends AppCompatActivity {
 
     //Buttons used to input numbers, operations, etc
@@ -37,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
             btnDec;
 
     //Calculator display
-    TextView display;
+    TextView display, expressionDisplay;
 
     //Values used in calculator operations
     //double val1, val2;
@@ -78,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Display
         display = findViewById(R.id.display);
+        expressionDisplay = findViewById(R.id.expressiondisplay);
 
         //Button 0
         btn0.setOnClickListener(new View.OnClickListener(){
@@ -185,7 +166,11 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addOperator("-");
+                if ( display.getText().equals("") ) {
+                    display.setText(display.getText()+"-");
+                } else {
+                    addOperator("-");
+                }
             }
         });
 
@@ -209,7 +194,16 @@ public class MainActivity extends AppCompatActivity {
         btnEql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (!display.getText().equals("")) {
+                    expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" = ");
+                    equation.add(display.getText().toString());
+                } else {
+                    expressionDisplay.setText(expressionDisplay.getText()+" = ");
+                }
+                if ( PostfixCalculator.validExpression(equation) ) {
+                    double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
+                    display.setText(String.valueOf(answer));
+                }
             }
         });
 
@@ -222,9 +216,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void clearScreen(){
         display.setText("");
         equation = new ArrayList<String>();
+        expressionDisplay.setText("");
     }
 
     private void addOperand(String num){
@@ -237,9 +233,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void addOperator(String operator) {
         if (!display.getText().equals("")) {
+            expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" "+operator+" ");
             equation.add(display.getText().toString());
             equation.add(operator);
-            display.setText(display.getText()+" "+operator+" ");
+            display.setText("");
         }
     }
 }
