@@ -200,9 +200,16 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     expressionDisplay.setText(expressionDisplay.getText()+" = ");
                 }
+
                 if ( PostfixCalculator.validExpression(equation) ) {
                     double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
-                    display.setText(String.valueOf(answer));
+
+                    if (answer % 1 == 0) {
+                        display.setText(String.valueOf((int)answer));
+                    } else {
+                        display.setText(String.valueOf(answer));
+                    }
+
                 }
             }
         });
