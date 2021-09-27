@@ -69,6 +69,8 @@ public class PostfixCalculator {
             } else {
                 if ( lastPart.equals(")")){
                     return false;
+                } else if ( lastPart.equals("/") && i.equals("0") ) {
+                    return false;
                 }
                 lastPart = i;
             }
