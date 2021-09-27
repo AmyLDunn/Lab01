@@ -1,5 +1,7 @@
 package com.example.lab01;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Stack;
@@ -20,73 +22,31 @@ public class PostfixCalculator {
 
     public static boolean validExpression(ArrayList<String> function) {
 
-        // Stack to hold the brackets. Making sure that the open brackets match the closing brackets
-        Stack<String> bracketStack = new Stack<String>();
-        // These booleans determine whether or not the previous part was an operator or an open bracket
-        boolean operator = false;
-        boolean openBracket = false;
-        boolean number = false;
-        boolean closeBracket = false;
+        // Last thing added
+        String lastPart = "";
         // If the function is empty, it is valid
         if ( function.size() == 0 ) {
             return true;
         }
         // If the last part of the function is an operator, it is not a valid function
         String last = function.get(function.size()-1);
-        if ( last.equals("+") || last.equals("-") || last.equals("*") || last.equals("/") || last.equals("^") ) {
+        if ( last.equals("+") || last.equals("-") || last.equals("*") || last.equals("/") ) {
             return false;
         }
         for ( String i: function ) {
-            // If the current part is an open bracket, set the operator to false and openBracket to true
-            if ( i.equals("(") ) {
-                if ( number){
-                    return false;
-                }
-                bracketStack.push(i);
-                operator = false;
-                openBracket = true;
-                number=false;
-                closeBracket = false;
-            } else if ( i.equals(")") ) {
-                // If the current part is a close bracket and there are no open brackets saved, it is invalid
-                if ( bracketStack.empty() ) {
-                    return false;
-                    // If the current part is an close bracket and the top of the stack is also a close bracket,
-                    // then the brackets are improperly closed
-                } else if ( bracketStack.pop().equals(")") ) {
-                    return false;
-                    // If the last part was an operator just before this closing bracket, it's not a good expression
-                } else if ( operator ) {
-                    return false;
-                }
-                closeBracket = true;
-            } else if ( i.equals("+") || i.equals("-") || i.equals("*") || i.equals("/") || i.equals("^") ) {
+
+            if ( i.equals("+") || i.equals("-") || i.equals("*") || i.equals("/") ) {
                 // If an operator is found immediately after an opening bracket, it's not a good expression
-                if ( openBracket ) {
-                    return false;
-                    // If two operators are next to each other, it's not a good expression
-                } else if ( operator ) {
+                if ( lastPart.equals("+") || lastPart.equals("-") || lastPart.equals("*") || lastPart.equals("/") ) {
                     return false;
                 }
-                // Sets the operator to true and resets the openBracket
-                operator = true;
-                openBracket = false;
-                number = false;
-                closeBracket = false;
+                lastPart = i;
             } else {
-                if ( closeBracket){
+                if ( lastPart.equals("/") && i.equals("0") ) {
                     return false;
                 }
-                // resets both the operator and openBracket
-                operator = false;
-                openBracket = false;
-                number=true;
-                closeBracket = false;
+                lastPart = i;
             }
-        }
-        // If the bracketStack has items remaining (there are open brackets that haven't been closed), it is not good
-        if ( !bracketStack.empty() ) {
-            return false;
         }
         return true;
 
@@ -96,7 +56,6 @@ public class PostfixCalculator {
 
         // This hashtable holds the BEDMASS priority order
         Hashtable<String, Integer> priority = new Hashtable<String, Integer>();
-        priority.put("^", 4);
         priority.put("*", 3);
         priority.put("/", 3);
         priority.put("+", 2);
@@ -113,30 +72,16 @@ public class PostfixCalculator {
 
             try {
                 // If this part is a valid number, add it to the postfix expression
-                double value = Double.parseDouble(i);
+                Double.parseDouble(i);
                 postfix.add(i);
             } catch ( NumberFormatException e ) {
-                // If the current part is an opening bracket, push it to the top of the stack
-                if ( i.equals("(") ) {
-                    operatorStack.push(i);
-                    // If the current part is a closing bracket, pop all the operators and add them to the postfix
-                    // expression until popping the associated open bracket
-                } else if ( i.equals(")") ) {
-                    String topOperator = operatorStack.pop();
-                    while ( !topOperator.equals("(") ) {
-                        postfix.add(topOperator);
-                        topOperator = operatorStack.pop();
-                    }
-                    // All other operators
-                } else {
-                    // If there's something that's in the operatorStack that has a higher priority than the current
-                    // part, pop it and add it to the postfix expression
-                    while ( !operatorStack.empty() && priority.get(operatorStack.peek()) >= priority.get(i) ) {
-                        postfix.add(operatorStack.pop());
-                    }
-                    // Push the current operator
-                    operatorStack.push(i);
+                // If there's something that's in the operatorStack that has a higher priority than the current
+                // part, pop it and add it to the postfix expression
+                while ( !operatorStack.empty() && priority.get(operatorStack.peek()) >= priority.get(i) ) {
+                    postfix.add(operatorStack.pop());
                 }
+                // Push the current operator
+                operatorStack.push(i);
             }
 
         }
@@ -184,7 +129,6 @@ public class PostfixCalculator {
         }
         // If the stack is empty, there was never actually an expression and the answer is always 0.0
         return 0.0;
-
     }
 
 }

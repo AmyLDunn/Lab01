@@ -7,25 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-/*
-
-    Remove the following issues when they're solved (or add to the list if you find some):
-
-    - The first time you press an operator it won't show up on the screen. It still works,
-      but you just can't see it.
-
-    - You can see what the correct answer is, but they're smaller than they should be (e.g.
-      6 + 6 = 0.12, 9 * 9 = 0.0081)
-
-    - I don't know how to get it to only display one operator (e.g. when you press 1 +, and
-      then press -, the text should ONLY display 1 -, but it will display 1 +- ...)
-
-    - When you press (operand) (operator) (equals) it produces a value. The equal button
-      should not do anything if only one value exists.
-
-    There are probably plenty of more errors, but these are the ones I could find.
-
- */
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,13 +17,19 @@ public class MainActivity extends AppCompatActivity {
             btnDec;
 
     //Calculator display
-    TextView display;
+    TextView display, expressionDisplay;
 
     //Values used in calculator operations
-    double val1, val2;
+    //double val1, val2;
+
+    //ArrayList to hold the equation
+    ArrayList<String> equation = new ArrayList<String>();
+
+    //If true, then the next button pressed should clear the screen
+    boolean toClear = false;
 
     //Boolean values that will determine what operation is requested
-    boolean add, mul, div, sub;
+    //boolean add, mul, div, sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Display
         display = findViewById(R.id.display);
+        expressionDisplay = findViewById(R.id.expressiondisplay);
 
         //Button 0
         btn0.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "0");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "0");
-                }
-
                 addOperand("0");
             }
         });
@@ -94,14 +75,6 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "1");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "1");
-                }
-
                 addOperand("1");
             }
         });
@@ -110,14 +83,6 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "2");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "2");
-                }
-
                 addOperand("2");
             }
         });
@@ -126,14 +91,6 @@ public class MainActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "3");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "3");
-                }
-
                 addOperand("3");
             }
         });
@@ -142,14 +99,6 @@ public class MainActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "4");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "4");
-                }
-
                 addOperand("4");
             }
         });
@@ -158,14 +107,6 @@ public class MainActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "5");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "5");
-                }
-
                 addOperand("5");
             }
         });
@@ -174,14 +115,6 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "6");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "6");
-                }
-
                 addOperand("6");
             }
         });
@@ -190,14 +123,6 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "7");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "7");
-                }
-
                 addOperand("7");
             }
         });
@@ -206,14 +131,6 @@ public class MainActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "8");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "8");
-                }
-
                 addOperand("8");
             }
         });
@@ -222,14 +139,6 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Determining if the number will be a part of val1 or val2
-                if (add == false && div == false && mul == false && sub == false) {
-                    val1 = Double.parseDouble( String.valueOf(val1) + "9");
-                } else {
-                    val2 = Double.parseDouble( String.valueOf(val2) + "9");
-                }
-
                 addOperand("9");
             }
         });
@@ -238,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
         btnDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( toClear ) {
+                    clearScreen();
+                }
                 if ( display.getText().equals("") ){
                     // If the display is empty, pressing a decimal should display "0."
                     display.setText("0.");
@@ -252,14 +164,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Letting system which operator is in use
                 addOperator("+");
-                add = true;
-                mul = false;
-                div = false;
-                sub = false;
-
             }
         });
 
@@ -267,14 +172,14 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Letting system which operator is in use
-                addOperator("-");
-                add = false;
-                mul = false;
-                div = false;
-                sub = true;
-
+                if ( toClear ) {
+                    clearScreen();
+                }
+                if ( display.getText().equals("") ) {
+                    display.setText(display.getText()+"-");
+                } else {
+                    addOperator("-");
+                }
             }
         });
 
@@ -282,14 +187,7 @@ public class MainActivity extends AppCompatActivity {
         btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Letting system which operator is in use
                 addOperator("*");
-                add = false;
-                mul = true;
-                div = false;
-                sub = false;
-
             }
         });
 
@@ -297,16 +195,7 @@ public class MainActivity extends AppCompatActivity {
         btnDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Letting system which operator is in use
                 addOperator("/");
-                add = false;
-                mul = false;
-                div = true;
-                sub = false;
-
-                //
-
             }
         });
 
@@ -314,24 +203,28 @@ public class MainActivity extends AppCompatActivity {
         btnEql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Determining which operator will be used
-                if (add) {
-                    val1 = val1 + val2;
-                } else if (div) {
-                    val1 = val1 / val2;
-                } else if (mul) {
-                    val1 = val1 * val2;
-                } else if (sub) {
-                    val1 = val1 - val2;
+                if ( toClear ) {
+                    clearScreen();
                 }
+                if (!display.getText().equals("")) {
+                    expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" = ");
+                    equation.add(display.getText().toString());
+                } else {
+                    expressionDisplay.setText(expressionDisplay.getText()+" = ");
+                }
+                if ( PostfixCalculator.validExpression(equation) ) {
+                    double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
 
-                //Resetting val2
-                val2 = 0;
+                    if (answer % 1 == 0) {
+                        display.setText(String.valueOf((int)answer));
+                    } else {
+                        display.setText(String.valueOf(answer));
+                    }
 
-                //Displaying the new value
-                display.setText("" + val1);
-
+                } else {
+                    display.setText("Error");
+                }
+                toClear = true;
             }
         });
 
@@ -339,43 +232,44 @@ public class MainActivity extends AppCompatActivity {
         btnClr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Clears the screen. Do we need to also clear the saved operations and numbers?
-                display.setText("");
-
-                //Clearing operators
-                add = false;
-                div = false;
-                mul = false;
-                sub = false;
-
-                //Clearing operands
-                val1 = 0;
-                val2 = 0;
+                clearScreen();
             }
         });
     }
 
+
+    private void clearScreen(){
+        display.setText("");
+        equation = new ArrayList<String>();
+        expressionDisplay.setText("");
+        toClear = false;
+    }
+
     private void addOperand(String num){
+        if ( toClear ) {
+            clearScreen();
+        }
         if ( display.getText().equals("0") ){
             display.setText(num);
         } else {
-            // Otherwise we add num to the right-side of the number
             display.setText(display.getText()+num);
         }
     }
 
     private void addOperator(String operator) {
+        if ( toClear ) {
+            clearScreen();
+        }
         if (!display.getText().equals("")) {
-            if (add) {
-                display.setText(display.getText() + operator);
-            } else if (mul) {
-                display.setText(display.getText() + operator);
-            } else if (div) {
-                display.setText(display.getText() + operator);
-            } else if (sub) {
-                display.setText(display.getText() + operator);
-            }
+            try {
+                Double.parseDouble(display.getText().toString());
+                expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" "+operator+" ");
+                equation.add(display.getText().toString());
+                equation.add(operator);
+                display.setText("");
+            } catch (Exception e) {
 
+            }
         }
     }
 }
