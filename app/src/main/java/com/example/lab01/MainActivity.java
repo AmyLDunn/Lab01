@@ -214,11 +214,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if ( PostfixCalculator.validExpression(equation) ) {
                     double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
-                    // If the answer has only 0 as the decimal places (eg. 9.0 or 104.0),
-                    //      it should be changed to an integer. Just not sure how to check for that.
-                    // It should be done right here, after calculating the answer and before displaying it
-                    // (or maybe while displaying it)
-                    display.setText(String.valueOf(answer));
+                    if (answer % 1 == 0) {
+                        display.setText(String.valueOf((int)answer));
+                    } else {
+                        display.setText(String.valueOf(answer));
+                    }
                 } else {
                     display.setText("Error");
                 }

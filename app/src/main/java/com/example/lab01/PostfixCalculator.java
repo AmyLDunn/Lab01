@@ -36,7 +36,6 @@ public class PostfixCalculator {
             return false;
         }
         for ( String i: function ) {
-            Log.e("Last part", ": "+lastPart);
             if ( i.equals("(") ) {
                 try {
                     Double.parseDouble(lastPart);
@@ -175,7 +174,6 @@ public class PostfixCalculator {
         }
         // If the stack is empty, there was never actually an expression and the answer is always 0.0
         return 0.0;
-
     }
 
 }
