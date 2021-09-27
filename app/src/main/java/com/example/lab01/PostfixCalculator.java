@@ -1,5 +1,7 @@
 package com.example.lab01;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Stack;
@@ -22,11 +24,8 @@ public class PostfixCalculator {
 
         // Stack to hold the brackets. Making sure that the open brackets match the closing brackets
         Stack<String> bracketStack = new Stack<String>();
-        // These booleans determine whether or not the previous part was an operator or an open bracket
-        boolean operator = false;
-        boolean openBracket = false;
-        boolean number = false;
-        boolean closeBracket = false;
+        // Last thing added
+        String lastPart = "";
         // If the function is empty, it is valid
         if ( function.size() == 0 ) {
             return true;
@@ -37,16 +36,15 @@ public class PostfixCalculator {
             return false;
         }
         for ( String i: function ) {
-            // If the current part is an open bracket, set the operator to false and openBracket to true
+            Log.e("Last part", ": "+lastPart);
             if ( i.equals("(") ) {
-                if ( number){
+                try {
+                    Double.parseDouble(lastPart);
                     return false;
+                } catch (Exception e) {
+                    bracketStack.push(i);
+                    lastPart = i;
                 }
-                bracketStack.push(i);
-                operator = false;
-                openBracket = true;
-                number=false;
-                closeBracket = false;
             } else if ( i.equals(")") ) {
                 // If the current part is a close bracket and there are no open brackets saved, it is invalid
                 if ( bracketStack.empty() ) {
@@ -56,32 +54,23 @@ public class PostfixCalculator {
                 } else if ( bracketStack.pop().equals(")") ) {
                     return false;
                     // If the last part was an operator just before this closing bracket, it's not a good expression
-                } else if ( operator ) {
+                } else if ( lastPart.equals("+") || lastPart.equals("-") || lastPart.equals("*") || lastPart.equals("/") || lastPart.equals("^") ) {
                     return false;
                 }
-                closeBracket = true;
             } else if ( i.equals("+") || i.equals("-") || i.equals("*") || i.equals("/") || i.equals("^") ) {
                 // If an operator is found immediately after an opening bracket, it's not a good expression
-                if ( openBracket ) {
+                if ( lastPart.equals("(") ) {
                     return false;
                     // If two operators are next to each other, it's not a good expression
-                } else if ( operator ) {
+                } else if ( lastPart.equals("+") || lastPart.equals("-") || lastPart.equals("*") || lastPart.equals("/") || lastPart.equals("^") ) {
                     return false;
                 }
-                // Sets the operator to true and resets the openBracket
-                operator = true;
-                openBracket = false;
-                number = false;
-                closeBracket = false;
+                lastPart = i;
             } else {
-                if ( closeBracket){
+                if ( lastPart.equals(")")){
                     return false;
                 }
-                // resets both the operator and openBracket
-                operator = false;
-                openBracket = false;
-                number=true;
-                closeBracket = false;
+                lastPart = i;
             }
         }
         // If the bracketStack has items remaining (there are open brackets that haven't been closed), it is not good
