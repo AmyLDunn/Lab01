@@ -203,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
                 if ( PostfixCalculator.validExpression(equation) ) {
                     double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
                     display.setText(String.valueOf(answer));
+                } else {
+                    display.setText("Error");
                 }
             }
         });
@@ -233,10 +235,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void addOperator(String operator) {
         if (!display.getText().equals("")) {
-            expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" "+operator+" ");
-            equation.add(display.getText().toString());
-            equation.add(operator);
-            display.setText("");
+            try {
+                Double.parseDouble(display.getText().toString());
+                expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" "+operator+" ");
+                equation.add(display.getText().toString());
+                equation.add(operator);
+                display.setText("");
+            } catch (Exception e) {
+
+            }
         }
     }
 }
