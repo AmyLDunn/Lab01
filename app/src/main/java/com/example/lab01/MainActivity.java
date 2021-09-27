@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     //ArrayList to hold the equation
     ArrayList<String> equation = new ArrayList<String>();
 
+    //If true, then the next button pressed should clear the screen
+    boolean toClear = false;
+
     //Boolean values that will determine what operation is requested
     //boolean add, mul, div, sub;
 
@@ -144,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
         btnDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( toClear ) {
+                    clearScreen();
+                }
                 if ( display.getText().equals("") ){
                     // If the display is empty, pressing a decimal should display "0."
                     display.setText("0.");
@@ -166,6 +172,9 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( toClear ) {
+                    clearScreen();
+                }
                 if ( display.getText().equals("") ) {
                     display.setText(display.getText()+"-");
                 } else {
@@ -194,6 +203,9 @@ public class MainActivity extends AppCompatActivity {
         btnEql.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( toClear ) {
+                    clearScreen();
+                }
                 if (!display.getText().equals("")) {
                     expressionDisplay.setText(expressionDisplay.getText()+display.getText().toString()+" = ");
                     equation.add(display.getText().toString());
@@ -206,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     display.setText("Error");
                 }
+                toClear = true;
             }
         });
 
@@ -223,9 +236,13 @@ public class MainActivity extends AppCompatActivity {
         display.setText("");
         equation = new ArrayList<String>();
         expressionDisplay.setText("");
+        toClear = false;
     }
 
     private void addOperand(String num){
+        if ( toClear ) {
+            clearScreen();
+        }
         if ( display.getText().equals("0") ){
             display.setText(num);
         } else {
@@ -234,6 +251,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addOperator(String operator) {
+        if ( toClear ) {
+            clearScreen();
+        }
         if (!display.getText().equals("")) {
             try {
                 Double.parseDouble(display.getText().toString());
