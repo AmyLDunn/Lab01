@@ -214,11 +214,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if ( PostfixCalculator.validExpression(equation) ) {
                     double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
+
                     if (answer % 1 == 0) {
                         display.setText(String.valueOf((int)answer));
                     } else {
                         display.setText(String.valueOf(answer));
                     }
+
                 } else {
                     display.setText("Error");
                 }
