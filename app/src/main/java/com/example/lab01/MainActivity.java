@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if ( PostfixCalculator.validExpression(equation) ) {
                     double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
+                    answer = Math.round(answer * 100000d) / 100000d;  // rounds result to five decimal places
 
                     if (answer % 1 == 0) {
                         display.setText(String.valueOf((int)answer));
