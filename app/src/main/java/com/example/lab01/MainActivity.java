@@ -219,19 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     expressionDisplay.setText(expressionDisplay.getText()+" = ");
                 }
-                if ( PostfixCalculator.validExpression(equation) ) {
-                    double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
-                    answer = Math.round(answer * 100000d) / 100000d;  // rounds result to five decimal places
-
-                    if (answer % 1 == 0) {
-                        display.setText(String.valueOf((int)answer));
-                    } else {
-                        display.setText(String.valueOf(answer));
-                    }
-
-                } else {
-                    display.setText("Error");
-                }
+                display.setText(getStringToDisplay(equation));
                 toClear = true;
             }
         });
@@ -243,6 +231,27 @@ public class MainActivity extends AppCompatActivity {
                 clearScreen();
             }
         });
+    }
+
+    /**
+     * Uses the current equation to determine what to display on the screen
+     * @param equation is the equation to calculate and display
+     * @return the String to display
+     */
+    private String getStringToDisplay(ArrayList<String> equation){
+        if ( PostfixCalculator.validExpression(equation) ) {
+            double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
+            answer = Math.round(answer * 100000d) / 100000d;  // rounds result to five decimal places
+
+            if (answer % 1 == 0) {
+                return String.valueOf((int)answer);
+            } else {
+                return String.valueOf(answer);
+            }
+
+        } else {
+            return "Error";
+        }
     }
 
     /**
