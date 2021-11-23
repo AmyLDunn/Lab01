@@ -9,6 +9,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * This is the main activity of the calculator app that displays the calculator screen
+ * and reacts to button presses
+ * @author Amy Dunn, 8093779
+ * @author
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     //Buttons used to input numbers, operations, etc
@@ -25,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
     //If true, then the next button pressed should clear the screen
     boolean toClear = false;
 
+    /**
+     * This is called when the screen is first created. It links the variables in this java file
+     * to their corresponding views in the associated layout xml
+     * @param savedInstanceState is the savedState that is reloaded when the app undergoes a
+     *                           configuration change.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -232,7 +245,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Clears the textview that displays the current expression
+     */
     private void clearScreen(){
         display.setText("");
         equation = new ArrayList<String>();
@@ -240,6 +255,10 @@ public class MainActivity extends AppCompatActivity {
         toClear = false;
     }
 
+    /**
+     * Appends an operand to the end of the current expression
+     * @param num is the operand to be appended
+     */
     private void addOperand(String num){
         if ( toClear ) {
             clearScreen();
@@ -251,6 +270,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Appends an operator to the end of the current expression
+     * @param operator is the operator to be appended
+     */
     private void addOperator(String operator) {
         if ( toClear ) {
             clearScreen();

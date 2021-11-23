@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.Stack;
 
 
-/*
+/**
  * This class has three methods that each take an ArrayList form of an equation.
  * validExpression checks if the equation is valid (not something weird like (3+)5 )
  * changeToPostFix changes the ArrayList to postfix form
@@ -16,6 +16,9 @@ import java.util.Stack;
  * Example input: ArrayList of Strings in the form ["(", "3", "+", "5", ")", "^", "6", "-", "4"]
  *                                                  (3+5)^6-4
  *
+ * @author Amy Dunn, 8093779
+ * @author
+ * @version 1.0
  */
 
 public class PostfixCalculator {
