@@ -20,6 +20,12 @@ import java.util.Stack;
 
 public class PostfixCalculator {
 
+    /**
+     * Determines if a given ArrayList of Strings is a valid mathematical function
+     * using +, -, *, / and numbers where each number or sign is an element in the list
+     * @param function is the function to be analyzed in ArrayList form
+     * @return true if it's a valid function or false otherwise
+     */
     public static boolean validExpression(ArrayList<String> function) {
 
         // Last thing added
@@ -52,6 +58,14 @@ public class PostfixCalculator {
 
     }
 
+    /**
+     * Changes a valid mathematical function from infix to postfix notation
+     * The mathematical function can only contain +, -, *, /, (, ), and numbers and it must be
+     * formatted into an ArrayList of Strings so that each number or symbol is a separate element
+     * of the list
+     * @param function is the valid mathematical function in ArrayList form
+     * @return An ArrayList of Strings that represents the function in postfix notation
+     */
     public static ArrayList<String> changeToPostfix(ArrayList<String> function) {
 
         // This hashtable holds the BEDMASS priority order
@@ -94,6 +108,14 @@ public class PostfixCalculator {
 
     }
 
+    /**
+     * Calculates the result of a mathematical function from postfix notation
+     * The mathematical function can contain +, -, *, /, and numbers
+     * It must be contained in an ArrayList of Strings where each element is a separate number or
+     * symbol
+     * @param function is the mathematical function in postfix notation
+     * @return the result of the function
+     */
     public static Double calculateFromPostfix(ArrayList<String> function){
 
         Stack<Double> operandStack = new Stack<Double>();

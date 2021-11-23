@@ -19,17 +19,11 @@ public class MainActivity extends AppCompatActivity {
     //Calculator display
     TextView display, expressionDisplay;
 
-    //Values used in calculator operations
-    //double val1, val2;
-
     //ArrayList to hold the equation
     ArrayList<String> equation = new ArrayList<String>();
 
     //If true, then the next button pressed should clear the screen
     boolean toClear = false;
-
-    //Boolean values that will determine what operation is requested
-    //boolean add, mul, div, sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -269,7 +263,8 @@ public class MainActivity extends AppCompatActivity {
                 equation.add(operator);
                 display.setText("");
             } catch (Exception e) {
-
+                display.setText("Error");
+                toClear = true;
             }
         }
     }
