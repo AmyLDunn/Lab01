@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
      * @param equation is the equation to calculate and display
      * @return the String to display
      */
-    private String getStringToDisplay(ArrayList<String> equation){
+    public static String getStringToDisplay(ArrayList<String> equation){
         if ( PostfixCalculator.validExpression(equation) ) {
             double answer = PostfixCalculator.calculateFromPostfix(PostfixCalculator.changeToPostfix(equation));
             answer = Math.round(answer * 100000d) / 100000d;  // rounds result to five decimal places
