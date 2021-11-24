@@ -17,7 +17,7 @@ import java.util.Stack;
  *                                                  (3+5)^6-4
  *
  * @author Amy Dunn, 8093779
- * @author
+ * @author Cole Stevens, 300171413
  * @version 1.0
  */
 

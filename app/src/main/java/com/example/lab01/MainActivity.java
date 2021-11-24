@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * This is the main activity of the calculator app that displays the calculator screen
  * and reacts to button presses
  * @author Amy Dunn, 8093779
- * @author
+ * @author Cole Stevens, 300171413
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
